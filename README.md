@@ -2,6 +2,26 @@
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.24.
 
+## This project uses NPM package manager
+Please, visit package page for more information & documentation.
+
+[angular2-mdl](https://github.com/mseemann/angular2-mdl)
+
+
+[angular2-mdl-ext](https://github.com/mseemann/angular2-mdl-ext)
+
+
+[material-design-icons](https://github.com/google/material-design-icons)
+
+
+[angularfire2](https://github.com/angular/angularfire2)
+
+
+[ng2-translate](https://github.com/ngx-translate/core)
+
+
+[angular2-chartjs](https://github.com/emn178/angular2-chartjs)
+
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
@@ -12,6 +32,8 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Production mode with Ahead of time compilation: `ng build -prod -aot`
+Also `-aot` param is available for `ng serve`
 
 ## Running unit tests
 
