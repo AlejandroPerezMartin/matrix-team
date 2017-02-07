@@ -7,18 +7,17 @@ Please, visit package page for more information & documentation.
 
 [angular2-mdl](https://github.com/mseemann/angular2-mdl)
 
-
 [angular2-mdl-ext](https://github.com/mseemann/angular2-mdl-ext)
-
 
 [material-design-icons](https://github.com/google/material-design-icons)
 
-
 [angularfire2](https://github.com/angular/angularfire2)
-
 
 [ng2-translate](https://github.com/ngx-translate/core)
 
+[ng2-validators](https://github.com/Nightapes/ng2-validators)
+
+[ts-md5](https://github.com/cotag/ts-md5)
 
 [angular2-chartjs](https://github.com/emn178/angular2-chartjs)
 

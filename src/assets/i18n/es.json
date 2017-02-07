@@ -1,0 +1,26 @@
+{
+  "language": "Idioma",
+  "c_language": "Idioma actual",
+  "login_signin": "Iniciar sessión / Registrarse",
+  "login": "Iniciar sessión",
+  "signin": "Registrarse",
+  "logout": "Cerrar sessión",
+  "anonymous": "Anónimo",
+  "login_with": "Iniciar sessión con",
+  "user_menu": "Abrir menú",
+  "submit": "Enviar",
+  "lang": {
+    "full": "Español",
+    "short": "ES",
+    "list": {
+      "full": {
+        "es": "Español",
+        "en": "English"
+      },
+      "short": {
+        "es": "ES",
+        "en": "EN"
+      }
+    }
+  }
+}

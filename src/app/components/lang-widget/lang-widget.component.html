@@ -1,0 +1,13 @@
+<div class="lang-wrapper">
+  <span title="{{ 'c_language' | translate }}">{{ 'lang.short' | translate }}</span>
+  <button mdl-button #btn1="mdlButton" (click)="m1.toggle($event, btn1)" mdl-button-type="icon" mdl-ripple title="{{'language' | translate}}">
+   <mdl-icon>translate</mdl-icon>
+  </button>
+  <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-left">
+    <mdl-menu-item mdl-ripple (click)="switch('es')" disabled *ngIf="lang.currentLang === 'es'">{{'lang.list.full.es' | translate}}</mdl-menu-item>
+    <mdl-menu-item mdl-ripple (click)="switch('es')" *ngIf="lang.currentLang !== 'es'">{{'lang.list.full.es' | translate}}</mdl-menu-item>
+
+    <mdl-menu-item mdl-ripple (click)="switch('en')" disabled *ngIf="lang.currentLang === 'en'">{{'lang.list.full.en' | translate}}</mdl-menu-item>
+    <mdl-menu-item mdl-ripple (click)="switch('en')" *ngIf="lang.currentLang !== 'en'">{{'lang.list.full.en' | translate}}</mdl-menu-item>
+  </mdl-menu>
+</div>

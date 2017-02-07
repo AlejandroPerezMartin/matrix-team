@@ -1,0 +1,84 @@
+<div class="mdl-grid">
+  <!-- Login Form -->
+  <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-cell--2-offset-desktop mdl-cell--2-offset-tablet mdl-card mdl-shadow--4dp">
+    <div class="mdl-card__title"><i class="material-icons">person</i>{{'login'|translate}}</div>
+
+    <form [formGroup]="LoginForm" (ngSubmit)="submitLogin()">
+      <div class="mdl-card__supporting-text">
+
+       <mdl-textfield
+        label="{{'auth_form.email'|translate}}"
+        name="email"
+        type="text"
+        formControlName="email"
+        floating-label
+        disableNativeValidityChecking
+        [class.is-invalid]="l_email.invalid && !l_email.pristine"
+        error-msg="{{'auth_form.email_error'|translate}}">
+       </mdl-textfield>
+       <mdl-textfield
+        label="{{'auth_form.pass'|translate}}"
+        name="pass"
+        type="password"
+        formControlName="password"
+        floating-label
+        disableNativeValidityChecking
+        [class.is-invalid]="l_password.invalid && !l_password.pristine"
+        error-msg="{{'auth_form.pass_error'|translate}}">
+       </mdl-textfield>
+
+      </div>
+      <div class="mdl-card__actions">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect bdev-btn-login--anonymous" (click)="AuthService.anonymousLogin()">{{'anonymous'|translate}}</button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent bdev-btn-login--google" (click)="AuthService.googleLogin()">Google</button>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent bdev-btn-login--email"><i class="material-icons">done</i> {{'submit'|translate}}</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone mdl-cell--2-offset-tablet mdl-card mdl-shadow--4dp">
+    <div class="mdl-card__title"><i class="material-icons">person_add</i>{{'signin'|translate}}</div>
+
+    <form [formGroup]="SigninForm" (ngSubmit)="submitSignin()">
+      <div class="mdl-card__supporting-text">
+
+        <mdl-textfield
+         label="{{'auth_form.fullname'|translate}}"
+         name="fullname"
+         type="text"
+         formControlName="fullname"
+         floating-label
+         disableNativeValidityChecking
+         [class.is-invalid]="s_fullname.invalid && !s_fullname.pristine"
+         error-msg="{{'auth_form.fullname_error'|translate}}">
+        </mdl-textfield>
+        <mdl-textfield
+         label="{{'auth_form.email'|translate}}"
+         name="email"
+         type="text"
+         formControlName="email"
+         floating-label
+         disableNativeValidityChecking
+         [class.is-invalid]="s_email.invalid && !s_email.pristine"
+         error-msg="{{'auth_form.email_error'|translate}}">
+        </mdl-textfield>
+        <mdl-textfield
+         label="{{'auth_form.pass'|translate}}"
+         name="pass"
+         type="password"
+         formControlName="password"
+         floating-label
+         disableNativeValidityChecking
+         [class.is-invalid]="s_password.invalid && !s_password.pristine"
+         error-msg="{{'auth_form.pass_error'|translate}}">
+        </mdl-textfield>
+
+      </div>
+      <div class="mdl-card__actions">
+        <br>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent bdev-btn-login--email"><i class="material-icons">done</i> {{'submit'|translate}}</button>
+      </div>
+    </form>
+
+  </div>
+</div>
