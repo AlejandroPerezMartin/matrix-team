@@ -104,7 +104,7 @@ export class AuthService {
       this.router.navigate([this.redirectUrl]);
       this.redirectUrl = undefined;
     } else {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/dashboard']);
     }
   }
 }

@@ -20,13 +20,20 @@ import { FIREBASE_CONFIG } from './services/auth/auth.config';
 // Chart.js
 import { ChartModule } from 'angular2-chartjs';
 
-// Custom imports
-import { AppComponent } from './components/app/app.component';
-import { AppRoutingModule, routingComponents } from './app.router';
+// Custom Services
 import { AuthService } from './services/auth/auth.service';
-import { AuthComponent } from './components/auth/auth.component';
+
+// Custom Modules
+import { AppRoutingModule, RoutingComponents } from './app.router';
+import { AdminModule } from './modules/admin/admin.module';
+import { UsersModule } from './modules/users/users.module';
+
+// Custom Components
+import { AppComponent } from './components/app/app.component';
 import { AuthWidgetComponent } from './components/auth-widget/auth-widget.component';
 import { LangWidgetComponent } from './components/lang-widget/lang-widget.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 export function customTranslateLoader(http: Http) {
   return new TranslateStaticLoader(http, './assets/i18n', '.json');
@@ -35,28 +42,33 @@ export function customTranslateLoader(http: Http) {
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
-    AuthComponent,
     AuthWidgetComponent,
     LangWidgetComponent,
-    routingComponents,
+    DashboardComponent,
+    RoutingComponents,
+    NotFoundComponent,
   ],
   imports: [
+    // Core modules
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule,
+    MdlModule,
+    MdlSelectModule,
+    MdlPopoverModule,
+    MdlExpansionPanelModule,
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (customTranslateLoader),
       deps: [Http]
     }),
-    MdlModule,
-    MdlSelectModule,
-    MdlPopoverModule,
-    MdlExpansionPanelModule,
+    // Forms Modules
+    FormsModule,
+    ReactiveFormsModule,
+    // Custom Modules
+    AdminModule,
+    UsersModule,
+    AppRoutingModule, // Must be the last one so '**' can be implemented
   ],
   providers: [ AuthService ],
   bootstrap: [ AppComponent ]

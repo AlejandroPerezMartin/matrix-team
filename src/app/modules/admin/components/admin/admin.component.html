@@ -1,0 +1,18 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--2-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+    <div class="mdl-grid sidebar">
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+        <button mdl-button mdl-button-type="raised" mdl-colored="primary" [routerLink]="['/admin', 'dashboard']" routerLinkActive="mdl-button--accent">{{ 'admin.title.dashboard' | translate }}</button>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
+        <button mdl-button mdl-button-type="raised" mdl-colored="primary" [routerLink]="['/admin', 'teams']" routerLinkActive="mdl-button--accent"><mdl-icon>people_outline</mdl-icon> {{ 'admin.title.teams' | translate }}</button>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
+        <button mdl-button mdl-button-type="raised" mdl-colored="primary" [routerLink]="['/admin', 'staff']" routerLinkActive="mdl-button--accent"><mdl-icon>person_outline</mdl-icon> {{ 'admin.title.staff' | translate }}</button>
+      </div>
+    </div>
+  </div>
+  <div class="mdl-cell mdl-cell--10-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+    <router-outlet></router-outlet>
+  </div>
+</div>

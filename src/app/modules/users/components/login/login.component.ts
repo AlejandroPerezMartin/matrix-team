@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
+import { Component, OnInit } from '@angular/core';
 import { EmailValidators } from 'ng2-validators';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../../../services/auth/auth.service';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.sass']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.sass']
 })
-export class AuthComponent {
+export class LoginComponent {
 
   // Login form
   public LoginForm: FormGroup;
@@ -37,6 +37,7 @@ export class AuthComponent {
    let data = this.LoginForm.value;
    this.AuthService.emailLogin(data.email, data.password);
   }
+  
   submitSignin() {
    let data = this.SigninForm.value;
    this.AuthService.register(data.fullname, data.email, data.password);

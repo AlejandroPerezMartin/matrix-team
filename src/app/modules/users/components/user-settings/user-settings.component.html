@@ -1,0 +1,15 @@
+<div class="mdl-grid">
+  <mdl-card mdl-shadow="8" class="mdl-cell mdl-cell--5-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+    <mdl-card-title>
+      <h2 mdl-card-title-text>{{ 'user.settings.title' | translate }}</h2>
+    </mdl-card-title>
+    <mdl-card-supporting-text>
+      <label for="">{{ 'user.settings.occupation' | translate }}</label>
+      <mdl-slider min="0" max="100" value="20" [step]="10"></mdl-slider><br>
+      <mdl-switch mdl-ripple>{{ 'user.settings.status' | translate }}</mdl-switch><br>
+    </mdl-card-supporting-text>
+    <mdl-card-actions mdl-card-border>
+      <button mdl-button mdl-button-type="raised" mdl-colored="accent">{{ 'submit' | translate }}</button>
+    </mdl-card-actions>
+  </mdl-card>
+</div>

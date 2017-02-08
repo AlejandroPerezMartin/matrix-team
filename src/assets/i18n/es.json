@@ -22,5 +22,12 @@
         "en": "EN"
       }
     }
+  },
+  "admin": {
+   "title": {
+    "dashboard": "Dashboard",
+    "teams": "Equipos",
+    "staff": "Usuarios"
+   }
   }
 }

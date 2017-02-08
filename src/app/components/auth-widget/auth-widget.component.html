@@ -1,5 +1,5 @@
 <div *ngIf="!AuthService.isAuthenticated()" class="auth-wrapper">
-  <a (click)="AuthService.saveRoute()" routerLink="/login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+  <a (click)="AuthService.saveRoute()" routerLink="/user/login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
     <i class="material-icons">person</i> {{'login_signin'|translate}}
   </a>
 </div>
@@ -17,7 +17,7 @@
      <button mdl-button #btn1="mdlButton" (click)="m1.toggle($event, btn1)" mdl-button-type="icon" mdl-ripple title="{{'user_menu'|translate}}"><mdl-icon>more_vert</mdl-icon></button>
      <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-right">
        <mdl-menu-item mdl-ripple routerLink="/user/profile">{{'page.profile'|translate}}</mdl-menu-item>
-       <mdl-menu-item mdl-ripple mdl-menu-item-full-bleed-divider routerLink="/user/config">{{'page.settings'|translate}}</mdl-menu-item>
+       <mdl-menu-item mdl-ripple mdl-menu-item-full-bleed-divider routerLink="/user/settings">{{'page.settings'|translate}}</mdl-menu-item>
        <mdl-menu-item *ngIf="AuthService.is_admin" routerLink="/admin">{{'page.admin'|translate}}</mdl-menu-item>
      </mdl-menu>
 

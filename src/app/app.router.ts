@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthComponent } from './components/auth/auth.component';
+import { AuthGuard } from './guards/auth.guard';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: 'login', component: AuthComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [ AuthGuard ] },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
@@ -12,8 +16,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
-  providers: [ ]
+  providers: [ AuthGuard ]
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [ AuthComponent ];
+export const RoutingComponents = [DashboardComponent, NotFoundComponent];
