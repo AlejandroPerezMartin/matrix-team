@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../../guards/auth.guard';
-import { LoginComponent }  from './components/login/login.component';
 import { UserSettingsComponent }  from './components/user-settings/user-settings.component';
 
 const routes: Routes = [
@@ -9,9 +8,8 @@ const routes: Routes = [
     path: 'user',
     children: [
       { path: '', pathMatch: 'full', redirectTo: '/user/profile' },
-      { path: 'profile', component: LoginComponent, canActivate: [AuthGuard] }, // TODO: Change to valid one
-      { path: 'settings', component: UserSettingsComponent, canActivate: [AuthGuard] }, // TODO: Change to valid one
-      { path: 'login', component: LoginComponent },
+      { path: 'profile', component: UserSettingsComponent, canActivate: [AuthGuard] },
+      { path: 'settings', component: UserSettingsComponent, canActivate: [AuthGuard] }
     ]
   }
 ];
@@ -25,4 +23,4 @@ const routes: Routes = [
 })
 export class UsersRoutingModule { }
 
-export const UsersRoutingComponents = [LoginComponent, UserSettingsComponent];
+export const UsersRoutingComponents = [UserSettingsComponent];

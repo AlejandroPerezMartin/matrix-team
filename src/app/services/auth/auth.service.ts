@@ -35,52 +35,8 @@ export class AuthService {
     }
   }
 
-  register(displayName: string, email: string, password: string) {
-    // *********************** CREATE START *********************
-    this.af.auth.createUser({ email: email, password: password })
-      .then((success) => {
-        // *********************** LOGIN START *********************
-        this.af.auth.login({
-          email: email,
-          password: password,
-        }, FIREBASE_AUTH_EMAIL).then((data) => {
-          // *********************** PROFILE UPDATE START *********************
-          this.user.auth.updateProfile({
-            displayName: displayName,
-            photoURL: 'https://www.gravatar.com/avatar/' + Md5.hashStr(email) + '?s=45'
-          }).then((success) => {
-            this.redirect();
-          }).catch((error) => {
-            this.dialogService.alert(error.message, 'OK', 'Sorry');
-          });
-          // *********************** PROFILE UPDATE END ***********************
-        }).catch((error) => {
-          this.dialogService.alert(error.message, 'OK', 'Sorry');
-        });
-        // *********************** LOGIN END ***********************
-      }).catch((error) => {
-        this.dialogService.alert(error.message, 'OK', 'Sorry');
-      });
-    // *********************** CREATE END ***********************
-  };
-
-  anonymousLogin() {
-    return this.af.auth.login(FIREBASE_AUTH_ANONYMOUS).then((data) => {
-      this.redirect();
-    });
-  };
-  googleLogin() {
-    this.af.auth.login(FIREBASE_AUTH_GOOGLE).then((data) => {
-      this.redirect();
-    });
-  };
-  emailLogin(email: string, pass: string) {
-    return this.af.auth.login({
-      email: email,
-      password: pass,
-    }, FIREBASE_AUTH_EMAIL).then((data) => {
-      this.redirect();
-    });
+  googleLogin(): firebase.Promise<FirebaseAuthState> {
+    return this.af.auth.login(FIREBASE_AUTH_GOOGLE);
   };
 
   logout(): Promise<void> {
@@ -89,6 +45,14 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     if (this.user != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isAdmin(): boolean {
+    if (this.user != null && this.is_admin) {
       return true;
     } else {
       return false;

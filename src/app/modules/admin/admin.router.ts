@@ -13,9 +13,9 @@ const routes: Routes = [
     children: [
      { path: '', component: AdminComponent, children: [
       { path: '', pathMatch: 'full', redirectTo: '/admin/dashboard' },
-      { path: 'dashboard', component: AdminDashboardComponent }, // TODO: Change to valid one
-      { path: 'teams', component: AdminTeamsComponent }, // TODO: Change to valid one
-      { path: 'staff', component: AdminStaffComponent }, // TODO: Change to valid one
+      { path: 'dashboard', component: AdminDashboardComponent },
+      { path: 'teams', component: AdminTeamsComponent },
+      { path: 'staff', component: AdminStaffComponent },
      ]}
     ]
   }

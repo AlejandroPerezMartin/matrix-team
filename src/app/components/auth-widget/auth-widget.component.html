@@ -1,6 +1,6 @@
 <div *ngIf="!AuthService.isAuthenticated()" class="auth-wrapper">
-  <a (click)="AuthService.saveRoute()" routerLink="/user/login" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-    <i class="material-icons">person</i> {{'login_signin'|translate}}
+  <a (click)="login()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    <i class="material-icons">person</i> {{'login_with'|translate}} Google
   </a>
 </div>
 
