@@ -1,14 +1,14 @@
-import { MatrixTeamPage } from './app.po';
+import { AppPage } from './app.po';
 
-describe('matrix-team App', function() {
-  let page: MatrixTeamPage;
+describe('matrix App', () => {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new MatrixTeamPage();
+    page = new AppPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('Welcome to app!');
   });
 });

@@ -1,0 +1,13 @@
+// Material-desing-lite with custom theme colors
+@import "~@angular-mdl/core/scss/color-definitions";
+
+$color-primary: $palette-blue-grey-700;
+$color-primary-dark: $palette-blue-grey-900;
+$color-accent: $palette-red-600;
+$color-primary-contrast: $color-dark-contrast;
+$color-accent-contrast: $color-dark-contrast;
+
+@import '~@angular-mdl/core/scss/material-design-lite';
+
+@import '~@angular-mdl/popover/popover';
+@import '~@angular-mdl/select/select';

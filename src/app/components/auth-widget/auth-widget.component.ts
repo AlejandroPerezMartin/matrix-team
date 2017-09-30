@@ -1,42 +1,38 @@
+import { MdlDialogService } from '@angular-mdl/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFire } from 'angularfire2';
-import { MdlDialogService } from 'angular2-mdl';
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
+
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'auth-widget',
   templateUrl: './auth-widget.component.html',
-  styleUrls: ['./auth-widget.component.sass']
+  styleUrls: ['./auth-widget.component.scss']
 })
 
 export class AuthWidgetComponent {
   private default_user_status = { status: false };
 
+  user: firebase.User;
+
   constructor(
-    public af: AngularFire,
-    public AuthService: AuthService,
+    private db: AngularFireDatabase,
+    public authService: AuthService,
     private dialogService: MdlDialogService,
     private router: Router
-  ) { }
+  ) {
+    this.authService.userObservable.subscribe(user => this.user = user);
+  }
 
   login() {
-    this.AuthService.googleLogin().then(auth => {
-      if (auth.auth.email.indexOf('emergya.com') > -1 && auth.auth.emailVerified) {
-        this.save();
-      } else {
-        this.AuthService.logout();
-        this.dialogService.alert('Invalid EMERGYA email', 'OK', 'Sorry!');
+    this.authService.googleLogin().then(auth => {
+      if (!auth) {
+        this.authService.logout();
+        this.dialogService.alert('Invalid @emergya.com email', 'Close', 'Sorry...');
       }
     });
   }
 
-  private save() {
-    let data = this.af.database.object('/users/' + this.AuthService.user.uid, { preserveSnapshot: true });
-    data.subscribe(result => {
-      if (!result.exists()) {
-        data.set(this.default_user_status).then(_ => this.dialogService.alert('New User created', 'OK', 'Wiiii!'));
-      }
-    });
-  }
 }

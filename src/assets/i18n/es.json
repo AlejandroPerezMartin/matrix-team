@@ -23,6 +23,15 @@
       }
     }
   },
+  "page": {
+    "profile": "Perfil",
+    "settings": "Ajustes"
+  },
+  "sidebar": {
+    "home": "Inicio",
+    "teams": "Equipos",
+    "staff": "Personal"
+  },
   "admin": {
    "title": {
     "dashboard": "Dashboard",
