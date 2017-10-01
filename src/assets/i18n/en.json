@@ -38,5 +38,12 @@
       "teams": "Teams",
       "staff": "Staff"
     }
+  },
+  "user": {
+    "settings": {
+      "title": "Title",
+      "occupation": "Occupation",
+      "status": "Status"
+    }
   }
 }

@@ -1,11 +1,11 @@
-<mdl-layout mdl-layout-fixed-header mdl-layout-header-seamed>
+<mdl-layout mdl-layout-fixed-header mdl-layout-header-seamed #sidebar>
   <mdl-layout-header>
     <mdl-layout-header-row>
       <mdl-layout-title>Matrix</mdl-layout-title>
       <mdl-layout-spacer></mdl-layout-spacer>
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <a class="mdl-navigation__link">{{'sidebar.home' | translate}}</a>
+        <a class="mdl-navigation__link" [routerLink]="['/dashboard']" routerLinkActive="is-active" (click)="sidebar.closeDrawer()">{{'sidebar.home' | translate}}</a>
         <a class="mdl-navigation__link">{{'sidebar.teams' | translate}}</a>
         <a class="mdl-navigation__link">{{'sidebar.staff' | translate}}</a>
         <lang-widget></lang-widget>
@@ -18,7 +18,7 @@
   <mdl-layout-drawer>
     <mdl-layout-title>Matrix</mdl-layout-title>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link">{{'sidebar.home' | translate}}</a>
+      <a class="mdl-navigation__link" [routerLink]="['/dashboard']" routerLinkActive="is-active" (click)="sidebar.closeDrawer()">{{'sidebar.home' | translate}}</a>
       <a class="mdl-navigation__link">{{'sidebar.teams' | translate}}</a>
       <a class="mdl-navigation__link">{{'sidebar.staff' | translate}}</a>
     </nav>

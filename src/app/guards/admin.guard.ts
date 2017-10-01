@@ -7,10 +7,14 @@ import { AuthService } from '../services/auth/auth.service';
 @Injectable()
 export class AdminGuard implements CanActivate {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
-  canActivate(): boolean | Observable<boolean> {
-    return this.authService.isAuthenticated && this.authService.isAdmin;
+  canActivate(): Observable<boolean> {
+
+    return this.authService.userObservable
+      .take(1)
+      .map(user => (user && this.authService.isAdmin))
+      .first();
   }
 
 }

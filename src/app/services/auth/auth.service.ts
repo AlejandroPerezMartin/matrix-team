@@ -32,7 +32,7 @@ export class AuthService {
     return this._user;
   }
 
-  get userObservable(): any {
+  get userObservable(): Observable<firebase.User> {
     return this.afAuth.authState;
   }
 
@@ -52,39 +52,41 @@ export class AuthService {
     return this._isAdmin;
   }
 
-  private adminCheck() {
+  private adminCheck(): void {
     this._isAdmin = this.user && this._adminsList.includes(this.user.uid);
   }
 
-googleLogin() {
+  googleLogin() {
     return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(response => {
         return this.db.object(`/users/${response.user.uid}`)
           .subscribe(user => {
-            if (!user.$exists() && response.user.email.includes('emergya.com')) {
+            if (response.user.email.includes('emergya.com')) {
+              this.logout();
+              return false;
+            } else {
+              if (!user.$exists()) {
+                const { displayName, email, emailVerified, photoURL, uid } = response.user;
 
-              const { displayName, email, emailVerified, photoURL, uid } = response.user;
+                this.db.object(`/users/${response.user.uid}`).set({
+                  displayName,
+                  email,
+                  emailVerified,
+                  photoURL,
+                  uid
+                });
 
-              this.db.object(`/users/${response.user.uid}`).set({
-                displayName,
-                email,
-                emailVerified,
-                photoURL,
-                uid
-              });
-
-              this.user = response.user;
-
-              return user;
+                this.user = response.user;
+                return user;
+              }
             }
-            return false;
           });
       })
       .catch(err => Observable.throw(err));
   }
 
   logout() {
-    return this.afAuth.auth.signOut().then(() => this.router.navigate(['/']));
+    this.afAuth.auth.signOut().then(() => this.router.navigate(['/']));
   }
 
 }

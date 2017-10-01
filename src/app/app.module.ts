@@ -14,6 +14,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AdminModule } from './modules/admin/admin.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { UsersModule } from './modules/users/users.module';
+import { HomeComponentComponent } from './components/home-component/home-component.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UsersModule } from './modules/users/users.module';
     LangWidgetComponent,
     DashboardComponent,
     RoutingComponents,
-    NotFoundComponent
+    NotFoundComponent,
+    HomeComponentComponent
   ],
   imports: [
     BrowserModule,

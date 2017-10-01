@@ -28,6 +28,7 @@ export class AuthWidgetComponent {
 
   login() {
     this.authService.googleLogin().then(auth => {
+      console.log(auth);
       if (!auth) {
         this.authService.logout();
         this.dialogService.alert('Invalid @emergya.com email', 'Close', 'Sorry...');

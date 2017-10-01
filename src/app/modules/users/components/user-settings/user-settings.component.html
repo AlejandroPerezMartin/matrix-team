@@ -4,8 +4,8 @@
       <h2 mdl-card-title-text>{{ 'user.settings.title' | translate }}</h2>
     </mdl-card-title>
     <mdl-card-supporting-text>
-      <label for="">{{ 'user.settings.occupation' | translate }}</label>
-      <mdl-slider min="0" max="100" value="20" [step]="10"></mdl-slider><br>
+      <label for="">{{ 'user.settings.occupation' | translate }} ({{occupation.value}}%)</label>
+      <mdl-slider #occupation min="0" max="100" value="20" [step]="10"></mdl-slider><br>
       <mdl-switch mdl-ripple>{{ 'user.settings.status' | translate }}</mdl-switch><br>
     </mdl-card-supporting-text>
     <mdl-card-actions mdl-card-border>
