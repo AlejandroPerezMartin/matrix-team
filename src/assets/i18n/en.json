@@ -23,11 +23,27 @@
       }
     }
   },
+  "page": {
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "sidebar": {
+    "home": "Home",
+    "teams": "Teams",
+    "staff": "Staff"
+  },
   "admin": {
     "title": {
       "dashboard": "Dashboard",
       "teams": "Teams",
       "staff": "Staff"
+    }
+  },
+  "user": {
+    "settings": {
+      "title": "Title",
+      "occupation": "Occupation",
+      "status": "Status"
     }
   }
 }

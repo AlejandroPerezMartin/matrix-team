@@ -1,74 +1,92 @@
 import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Rx';
-import { Md5 } from 'ts-md5/dist/md5';
-import { Router } from '@angular/router';
+
 import { Injectable } from '@angular/core';
-import { MdlDialogService } from 'angular2-mdl';
-import { AngularFire, FirebaseAuthState, FirebaseObjectObservable } from 'angularfire2';
-import { FIREBASE_AUTH_ANONYMOUS, FIREBASE_AUTH_EMAIL, FIREBASE_AUTH_GOOGLE } from './auth.config';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class AuthService {
-  public user: any;
-  public is_admin = false;
-  public redirectUrl: string;
-  private admin_list;
 
-  constructor(public af: AngularFire, private router: Router, private dialogService: MdlDialogService) {
-    this.af.database.object(`/roles/admin/`).subscribe(list => {
-      this.admin_list = list;
-      this.adminCheck();
-    });
-    this.af.auth.subscribe(auth => {
-      this.user = auth;
-      this.adminCheck();
-    });
+  private _user: firebase.User;
+  private _adminsList: string[] = [];
+  private _isAdmin = false;
+
+  constructor(
+    public afAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
+    private router: Router,
+  ) {
+    this.afAuth.authState
+      .map(user => this.user = user)
+      .switchMap(() => this.db.object(`/roles/admin/`))
+      .subscribe(list => {
+        this._adminsList = Object.keys(list);
+        this.adminCheck();
+      });
   }
 
-  private adminCheck() {
-    if (this.user != null && this.admin_list != null) {
-      if (this.admin_list[this.user.uid] !== undefined) {
-        this.is_admin = true;
-      } else {
-        this.is_admin = false;
-      }
-    }
+  get user(): firebase.User {
+    return this._user;
   }
 
-  googleLogin(): firebase.Promise<FirebaseAuthState> {
-    return this.af.auth.login(FIREBASE_AUTH_GOOGLE);
-  };
-
-  logout(): Promise<void> {
-    return this.af.auth.logout();
+  get userObservable(): Observable<firebase.User> {
+    return this.afAuth.authState;
   }
 
-  isAuthenticated(): boolean {
-    if (this.user != null) {
-      return true;
-    } else {
-      return false;
-    }
+  set user(value: firebase.User) {
+    this._user = value;
   }
 
-  isAdmin(): boolean {
-    if (this.user != null && this.is_admin) {
-      return true;
-    } else {
-      return false;
-    }
+  get isAuthenticated(): boolean {
+    return this._user !== null;
   }
 
-  saveRoute() {
-    this.redirectUrl = this.router.url;
+  get id(): string {
+    return this.isAuthenticated ? this.user.uid : '';
   }
 
-  redirect(): void {
-    if (this.redirectUrl !== undefined) {
-      this.router.navigate([this.redirectUrl]);
-      this.redirectUrl = undefined;
-    } else {
-      this.router.navigate(['/dashboard']);
-    }
+  get isAdmin(): boolean {
+    return this._isAdmin;
   }
+
+  private adminCheck(): void {
+    this._isAdmin = this.user && this._adminsList.includes(this.user.uid);
+  }
+
+  googleLogin() {
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then(response => {
+        return this.db.object(`/users/${response.user.uid}`)
+          .subscribe(user => {
+            if (response.user.email.includes('emergya.com')) {
+              this.logout();
+              return false;
+            } else {
+              if (!user.$exists()) {
+                const { displayName, email, emailVerified, photoURL, uid } = response.user;
+
+                this.db.object(`/users/${response.user.uid}`).set({
+                  displayName,
+                  email,
+                  emailVerified,
+                  photoURL,
+                  uid
+                });
+
+                this.user = response.user;
+                return user;
+              }
+            }
+          });
+      })
+      .catch(err => Observable.throw(err));
+  }
+
+  logout() {
+    this.afAuth.auth.signOut().then(() => this.router.navigate(['/']));
+  }
+
 }

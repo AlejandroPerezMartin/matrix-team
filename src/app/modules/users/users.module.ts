@@ -1,30 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Http } from '@angular/http';
 
-import { MdlModule } from 'angular2-mdl';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { UsersRoutingModule, UsersRoutingComponents } from './users.router';
-import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate';
+import { SharedModule } from '../shared/shared.module';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
-
-export function customTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, './assets/i18n', '.json');
-}
+import { UsersRoutingComponents, UsersRoutingModule } from './users.router';
 
 @NgModule({
   imports: [
-    CommonModule,
-    UsersRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MdlModule,
-    TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (customTranslateLoader),
-      deps: [Http]
-    }),
+    SharedModule,
+    UsersRoutingModule
   ],
-  declarations: [ UsersRoutingComponents, UserSettingsComponent ]
+  declarations: [
+    UsersRoutingComponents,
+    UserSettingsComponent
+  ]
 })
 export class UsersModule { }

@@ -1,36 +1,41 @@
 import { Component } from '@angular/core';
-import {TranslateService, LangChangeEvent} from 'ng2-translate';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'lang-widget',
   templateUrl: './lang-widget.component.html',
-  styleUrls: ['./lang-widget.component.sass']
+  styleUrls: ['./lang-widget.component.scss']
 })
 export class LangWidgetComponent {
-  private lang;
-  public current: string;
 
-  constructor(lang: TranslateService) {
-    lang.addLangs(['en', 'es']);
-    lang.setDefaultLang('en');
-    lang.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.current = lang.currentLang;
+  public language;
+
+  public currentLang: string;
+
+  constructor(
+    private translate: TranslateService
+  ) {
+    this.translate.setDefaultLang('en');
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.currentLang = this.translate.currentLang;
     });
-    this.lang = lang;
+
+    this.language = this.translate;
     this.shitchToBrowserDefault();
   }
 
   switch(value: string) {
     if (value !== undefined) {
-      this.lang.use(value.match(/es|en/) ? value : this.lang.getDefaultLang());
+      this.language.use(value.match(/es|en/) ? value : this.language.getDefaultLang());
     } else {
       this.shitchToBrowserDefault();
     }
-  };
+  }
 
   shitchToBrowserDefault() {
-    let browserLang: string = this.lang.getBrowserLang();
-    this.lang.use(browserLang.match(/es|en/) ? browserLang : this.lang.getDefaultLang());
+    const browserLang: string = this.language.getBrowserLang();
+    this.language.use(browserLang.match(/es|en/) ? browserLang : this.language.getDefaultLang());
   }
 
 }
