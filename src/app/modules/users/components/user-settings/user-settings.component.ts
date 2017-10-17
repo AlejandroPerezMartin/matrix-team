@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-user-settings',
   templateUrl: './user-settings.component.html',
   styleUrls: ['./user-settings.component.scss']
 })
-export class UserSettingsComponent implements OnInit {
+export class UserSettingsComponent {
 
   public skills: Array<Object> = [
     { name: 'php', title: 'PHP' },
@@ -23,10 +23,5 @@ export class UserSettingsComponent implements OnInit {
     { name: 'c#', title: 'C#' },
     { name: '.net', title: '.NET' },
   ];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }

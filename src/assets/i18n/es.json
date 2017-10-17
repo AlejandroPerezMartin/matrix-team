@@ -1,14 +1,15 @@
 {
   "language": "Idioma",
   "c_language": "Idioma actual",
-  "login_signin": "Iniciar sessión / Registrarse",
-  "login": "Iniciar sessión",
+  "login_signin": "Iniciar sesión / Registrarse",
+  "login": "Iniciar sesión",
   "signin": "Registrarse",
   "logout": "Cerrar sessión",
   "anonymous": "Anónimo",
-  "login_with": "Iniciar sessión con",
+  "login_with": "Iniciar sesión con",
   "user_menu": "Abrir menú",
   "submit": "Enviar",
+  "not_found": "No Encontrado",
   "lang": {
     "full": "Español",
     "short": "ES",
