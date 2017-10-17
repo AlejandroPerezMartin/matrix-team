@@ -1,28 +1,26 @@
-<div *ngIf="!AuthService.isAuthenticated()" class="auth-wrapper">
+<div *ngIf="!authService.isAuthenticated" class="auth-wrapper">
   <a (click)="login()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
     <i class="material-icons">person</i> {{'login_with'|translate}} Google
   </a>
 </div>
 
-<div *ngIf="AuthService.isAuthenticated()" class="auth-wrapper">
+<div *ngIf="authService.isAuthenticated && user" class="auth-wrapper">
   <span class="mdl-chip mdl-chip--contact">
 
-    <img class="mdl-chip__contact" *ngIf="AuthService.user.auth.photoURL" src="{{ AuthService.user.auth.photoURL }}"/>
-    <img class="mdl-chip__contact" *ngIf="!AuthService.user.auth.photoURL" src="assets/avatar.png"/>
+    <img class="mdl-chip__contact" src="{{user.photoURL || 'assets/avatar.png'}}"/>
 
-    <span class="mdl-chip__text" *ngIf="AuthService.user.auth.displayName">{{ AuthService.user.auth.displayName }}</span>
-    <span class="mdl-chip__text" *ngIf="!AuthService.user.auth.displayName">Anonymous</span>
+    <span class="mdl-chip__text">{{ user.displayName || 'Anonymous' }}</span>
 
-    <div class="group">
-     <button mdl-button #btn1="mdlButton" (click)="m1.toggle($event, btn1)" mdl-button-type="icon" mdl-ripple title="{{'user_menu'|translate}}"><mdl-icon>more_vert</mdl-icon></button>
-     <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-right">
-       <mdl-menu-item mdl-ripple routerLink="/user/profile">{{'page.profile'|translate}}</mdl-menu-item>
-       <mdl-menu-item mdl-ripple mdl-menu-item-full-bleed-divider routerLink="/user/settings">{{'page.settings'|translate}}</mdl-menu-item>
-       <mdl-menu-item *ngIf="AuthService.is_admin" routerLink="/admin">{{'page.admin'|translate}}</mdl-menu-item>
-     </mdl-menu>
+  <div class="group">
+    <button mdl-button #btn1="mdlButton" (click)="m1.toggle($event, btn1)" mdl-button-type="icon" mdl-ripple title="{{'user_menu'|translate}}"><mdl-icon>more_vert</mdl-icon></button>
+    <mdl-menu #m1="mdlMenu" mdl-menu-position="bottom-right">
+      <mdl-menu-item mdl-ripple [routerLink]="['/user', 'profile']">{{'page.profile'|translate}}</mdl-menu-item>
+      <mdl-menu-item mdl-ripple mdl-menu-item-full-bleed-divider [routerLink]="['/user', 'settings']">{{'page.settings'|translate}}</mdl-menu-item>
+      <mdl-menu-item *ngIf="authService.isAdmin" [routerLink]="['/admin']">{{'page.admin'|translate}}</mdl-menu-item>
+    </mdl-menu>
 
-     <a (click)="AuthService.logout();" class="mdl-chip__action" title="{{'logout'|translate}}"><i class="material-icons">cancel</i></a>
+    <a (click)="authService.logout();" class="mdl-chip__action" title="{{'logout'|translate}}"><i class="material-icons">cancel</i></a>
 
-    </div>
+  </div>
   </span>
 </div>
