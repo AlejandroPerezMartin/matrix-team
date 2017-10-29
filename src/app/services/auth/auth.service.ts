@@ -21,7 +21,7 @@ export class AuthService {
   ) {
     this.afAuth.authState
       .map(user => this.user = user)
-      .switchMap(() => this.db.object(`/roles/admin/`))
+      .switchMap(() => this.db.object(`/roles/admin/`).valueChanges())
       .subscribe(list => {
         this._adminsList = Object.keys(list);
         this.adminCheck();
@@ -59,13 +59,15 @@ export class AuthService {
   googleLogin() {
     return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(response => {
-        return this.db.object(`/users/${response.user.uid}`)
+        return this.db.object(`/users/${response.user.uid}`).valueChanges()
           .subscribe(user => {
-            if (response.user.email.includes('emergya.com')) {
+
+            if (!response.user.email.includes('emergya.com')) {
               this.logout();
               return false;
             } else {
-              if (!user.$exists()) {
+
+              if (!user) {
                 const { displayName, email, emailVerified, photoURL, uid } = response.user;
 
                 this.db.object(`/users/${response.user.uid}`).set({
@@ -75,10 +77,10 @@ export class AuthService {
                   photoURL,
                   uid
                 });
-
-                this.user = response.user;
-                return user;
               }
+
+              this.user = response.user;
+              return response.user;
             }
           });
       })
